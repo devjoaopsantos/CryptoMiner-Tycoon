@@ -1,0 +1,11 @@
+{
+  "name": "CryptoMiner Tycoon",
+  "short_name": "CryptoMiner",
+  "description": "Simulador de mineração de criptomoedas",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#080b14",
+  "theme_color": "#080b14",
+  "lang": "pt-BR",
+  "icons": [{"src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}]
+}

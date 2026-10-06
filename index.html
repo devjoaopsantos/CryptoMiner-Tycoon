@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CryptoMiner Tycoon · simulador de mineração</title>
+<meta name="description" content="CryptoMiner Tycoon: jogo de simulação de mineração de criptomoedas. Monte sua sala, jogue mini jogos e acompanhe seus ganhos simulados.">
+<meta name="theme-color" content="#080b14">
+<meta name="robots" content="index,follow">
+<meta name="application-name" content="CryptoMiner Tycoon">
+<meta property="og:type" content="website"><meta property="og:locale" content="pt_BR"><meta property="og:site_name" content="CryptoMiner Tycoon">
+<meta property="og:title" content="CryptoMiner Tycoon · simulador de mineração"><meta property="og:description" content="Simulador de mineração de criptomoedas. Jogo de simulação, sem promessa de ganhos.">
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="CryptoMiner Tycoon · simulador de mineração"><meta name="twitter:description" content="Simulador de mineração de criptomoedas. Jogo de simulação, sem promessa de ganhos.">
+<link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="style.css?v=1.0.0">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><linearGradient id="hsg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe27a"/><stop offset="1" stop-color="#ff9d1a"/></linearGradient><linearGradient id="sog" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#9945ff"/><stop offset="1" stop-color="#14f195"/></linearGradient></svg>
+<div id="fxbar" class="hide"></div>
+<div class="w">
+<div id="demob" class="warn" style="margin:6px 0 10px">🧪 <b>Versão de teste:</b> saldos, ganhos e saques são <b>simulados</b>. Nenhum valor real é pago ou cobrado.</div>
+<div id="avs" class="warn hide" style="margin:6px 0 10px"></div>
+<h1>⛏️ CryptoMiner Tycoon</h1>
+<div class="sub"><button id="snb" style="float:right;padding:3px 10px">🔊</button><button id="lgo" class="hide" style="float:right;padding:3px 10px;margin-right:6px"></button>Simulador de mineração · saldo virtual (modo demonstração)<button id="tgC" style="padding:3px 10px;font-size:11px;border-radius:999px;margin-left:8px"></button></div>
+<section id="mine">
+<div id="usdbar" class="c" style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 8px;padding:8px 12px"><div><small style="display:inline">💵 Dólar americano (USD → BRL)</small><div style="font-size:17px;font-weight:800;font-variant-numeric:tabular-nums">US$ 1 = <span id="brlv">R$ …</span> <span id="brlc" style="font-size:12px"></span></div></div><div style="text-align:right"><span id="brls" class="tag" style="font-size:10px">carregando…</span><small id="brlt" style="display:block;font-size:10px;margin-top:3px"></small></div></div>
+<div class="g cg">
+<div class="c" id="crc" style="cursor:pointer;position:relative"><small id="crl">VLX</small><b class="a" id="cr">0</b><span style="position:absolute;top:6px;right:8px;background:linear-gradient(90deg,#ffb020,#ff8a1f);color:#1a1000;border-radius:50%;width:15px;height:15px;font-size:12px;font-weight:900;line-height:15px;text-align:center">+</span></div>
+<div class="c"><small id="lt"></small><b class="t" id="trx">0</b><small id="trxu"></small></div>
+<div class="c"><small id="lp"></small><b class="p" id="pol">0</b><small id="polu"></small></div>
+<div class="c"><small id="ls"></small><b id="shib" style="color:#ffa409">0</b><small id="shibu"></small></div>
+<div class="c"><small id="lxr"></small><b id="xrp" style="color:#cfd8e6">0</b><small id="xrpu"></small></div>
+<div class="c"><small id="lsl"></small><b id="sol" style="color:#14f195">0</b><small id="solu"></small></div>
+</div>
+<div class="c hash"><div><small>Poder de mineração</small><b id="hp">0 GH/s</b><small id="rate"></small></div><span class="tag hide" id="bt"></span></div>
+<div class="c hide" id="evb" style="margin-top:8px;text-align:center"></div>
+<div class="c" style="margin-top:8px"><small>🔋 Bateria</small><b id="enb"></b><div class="bar"><i id="enf"></i></div><small id="ent"></small></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin:14px 0 8px"><b style="font-size:15px">📊 Seus ganhos</b><button id="inf" style="padding:5px 12px;font-size:12px">ℹ️ Como funciona</button></div><div id="dst"></div>
+<h2>Sua sala de mineração</h2>
+<div class="sg" id="slots"></div>
+<div class="c" style="margin-top:12px"><div style="display:flex;align-items:center;gap:8px"><small>⚙️ Alocação de mineração</small><button id="tgA" style="padding:3px 10px;font-size:11px;border-radius:999px;margin:0"></button></div>
+<div id="alw"></div>
+<div class="warn">Divida seu poder entre TRX, POL, SHIB, XRP e SOL (ajuste cada um manualmente, total máximo de 100%); a mudança vale na hora. Toque em um slot vazio para colocar um equipamento. Eles mineram sozinhos, até com a página fechada.</div></div>
+</section>
+
+<section id="shop" class="hide"><div class="hero" style="--hc:#ffb020"><span class="hw">🛍️</span><span class="hi">🛍️</span><div class="ht"><b>Mercado Voltrix</b><small>Equipamentos, baterias, caixas e poções</small></div><span class="hb" id="hb_shop"></span></div><div class="warn" style="margin-top:0">🔀 Fundir: 3 equipamentos iguais do estoque viram 1 do nível seguinte.</div><div class="seg" style="margin:8px 0 12px"><button id="tabE" class="on" style="flex:1">🖥️ Equipamentos</button><button id="tabB" style="flex:1">🔋 Baterias</button><button id="tabX" style="flex:1">🎁 Caixa & Poções</button></div>
+<div id="sl" class="sh"></div><div id="sb2" class="sh hide"></div><div id="sx" class="sh hide"></div></section>
+
+<section id="ads" class="hide"><div class="hero" style="--hc:#8aa4ff"><span class="hw">🎮</span><span class="hi">🎮</span><div class="ht"><b>Arena de Jogos</b><small>Jogue, assista e turbine seu poder</small></div><span class="hb" id="hb_ads"></span></div>
+<div id="gl2" class="sh" style="margin-bottom:12px"></div>
+<div class="warn" id="gst">Ao terminar um mini jogo você assiste a um anúncio e recebe de +5 a +20 GH/s por 3 minutos, conforme sua pontuação.</div>
+<h2>📺 Anúncios</h2>
+<div class="c adc"><div class="adp"><i></i></div><div style="min-width:0"><b>Assista e ganhe</b><div style="margin:6px 0"><span class="chip">⚡ +10 GH/s · 3 min</span> <span class="chip">🔋 +200 energia</span></div><small id="ai"></small></div></div>
+<button class="pr" id="adb" style="width:100%;margin-top:8px">▶ Assistir anúncio</button>
+<div class="warn" style="text-align:left">Anúncio simulado (10 segundos). Assistir de novo soma mais 3 minutos, no máximo 30 minutos acumulados.</div></section>
+
+<section id="ex" class="hide"><div class="hero" style="--hc:#4fd8ff"><span class="hw">🔄</span><span class="hi">🔄</span><div class="ht"><b>Câmbio Cripto</b><small>Venda por VLX ou troque entre moedas</small></div><span class="hb" id="hb_ex"></span></div>
+<div class="c" id="qt" style="margin-bottom:10px"></div>
+<div class="c"><div id="xcs" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+<div id="xp" style="margin:12px 0 4px;font-size:15px"></div><small id="xb"></small>
+<input id="xa" inputmode="decimal" placeholder="Quantidade para vender">
+<div style="display:flex;gap:6px;margin-bottom:8px"><button data-pc="0.25" style="flex:1">25%</button><button data-pc="0.5" style="flex:1">50%</button><button data-pc="1" style="flex:1">Tudo</button></div>
+<div class="c" style="text-align:center;margin-bottom:8px"><b id="xr" class="ok"></b></div>
+<button class="pr" id="xs" style="width:100%">Vender</button>
+<div class="warn">A cotação segue o preço real do mercado em dólar e atualiza a cada 10 segundos (se estiver sem internet, usa uma simulação). Venda quando estiver alto! VLX serve para comprar equipamentos e slots.</div></div>
+<h2>🔄 Trocar cripto por cripto</h2>
+<div class="c"><div style="display:flex;justify-content:space-between;align-items:center"><b id="sd"></b><button id="sflip" style="padding:6px 12px">⇄ Inverter</button></div>
+<div id="spk" style="margin-top:8px"></div><div id="sq" style="margin:10px 0 4px;font-size:15px"></div><small id="sb"></small>
+<input id="sa" inputmode="decimal" placeholder="Quantidade para trocar">
+<div style="display:flex;gap:6px;margin-bottom:8px"><button data-sp="0.25" style="flex:1">25%</button><button data-sp="0.5" style="flex:1">50%</button><button data-sp="1" style="flex:1">Tudo</button></div>
+<div class="c" style="text-align:center;margin-bottom:8px"><b id="sr" class="ok"></b></div>
+<button class="pr" id="ss" style="width:100%">Trocar</button>
+<div class="warn">A troca usa a cotação do momento (TRX/POL/SHIB/XRP/SOL) e cobra taxa de 1%.</div></div>
+</section>
+
+<section id="xt" class="hide"><div class="hero" style="--hc:#ff6fa8"><span class="hw">🎁</span><span class="hi">🎁</span><div class="ht"><b>Central de Recompensas</b><small>Bônus, missões, melhorias e ranking</small></div><span class="hb" id="hb_xt"></span></div><h2>🎁 Bônus diário</h2>
+<div class="c" style="text-align:center"><b id="dl"></b><small id="ds" style="margin:4px 0 8px"></small><button class="pr" id="db" style="width:100%">Resgatar</button></div>
+<h2>🎯 Missões</h2><div id="ms"></div>
+<h2>🔧 Melhorias</h2><div id="ups"></div>
+<h2>🏆 Ranking de mineradores</h2><div class="c" id="rk"></div></section>
+
+<section id="pf" class="hide"><h2>👤 Meu perfil</h2><div class="c" id="pfi"></div>
+<h2>💵 Comprar VLX</h2>
+<div class="c"><small>Pague em dólar usando sua carteira cripto (Polygon ou Tron)</small>
+<div id="pk" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0"></div>
+<input id="pcu" inputmode="decimal" placeholder="Outro valor em US$ (mín. 1, máx. 1.000)">
+<div id="pcs" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+<div id="pqt" style="margin:10px 0;font-size:14px"></div>
+<div id="phs" class="sub" style="margin:6px 0"></div>
+<button class="pr" id="pbuy" style="width:100%">Pagar com carteira</button>
+<div class="warn">Modo demonstração: nenhuma transação real é enviada e a cotação em dólar é de referência. Para valer dinheiro de verdade, o pagamento precisa ser confirmado na blockchain por um servidor.</div></div>
+<button id="pfo" style="width:100%;margin-top:14px">Sair da conta</button>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px"><button id="pfx">⬇️ Exportar progresso</button><button id="pfm">⬆️ Importar progresso</button></div><input type="file" id="pff" accept="application/json,.json" class="hide">
+<button id="pfd" style="width:100%;margin-top:8px;color:var(--trx)">🗑️ Excluir minha conta e dados</button></section>
+
+<section id="wd" class="hide"><div class="hero" style="--hc:#2ee59d"><span class="hw">💵</span><span class="hi">💵</span><div class="ht"><b>Cofre de Saque</b><small>Retire seus ganhos para a sua carteira</small></div><span class="hb" id="hb_wd"></span></div>
+<div class="c" id="wnet" style="margin-bottom:10px;font-size:13px"></div>
+<div class="c" style="margin-bottom:10px"><small>🔗 Carteiras conectadas</small>
+<div id="wc2"></div>
+<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"><button id="cMM" style="flex:1;min-width:120px"><img class="wl" src="img/wallets/metamask.svg" alt="" data-fb="🦊" onerror="if(!this.dataset.t){this.dataset.t=1;this.src=this.src.replace('.svg','.png')}else this.outerHTML=this.dataset.fb"> MetaMask</button><button id="cTL" style="flex:1;min-width:120px"><img class="wl" src="img/wallets/tronlink.svg" alt="" data-fb="🔴" onerror="if(!this.dataset.t){this.dataset.t=1;this.src=this.src.replace('.svg','.png')}else this.outerHTML=this.dataset.fb"> TronLink</button><button id="cPH" style="flex:1;min-width:120px"><img class="wl" src="img/wallets/phantom.svg" alt="" data-fb="👻" onerror="if(!this.dataset.t){this.dataset.t=1;this.src=this.src.replace('.svg','.png')}else this.outerHTML=this.dataset.fb"> Phantom</button><button id="cXR" style="flex:1;min-width:120px"><img class="wl" src="img/wallets/crossmark.svg" alt="" data-fb="💧" onerror="if(!this.dataset.t){this.dataset.t=1;this.src=this.src.replace('.svg','.png')}else this.outerHTML=this.dataset.fb"> Crossmark</button></div>
+<div class="warn" style="margin-bottom:0">MetaMask (ou outra carteira EVM) conecta na rede Polygon para POL. TronLink conecta para TRX. SHIB usa o mesmo endereço EVM da MetaMask. Phantom conecta para SOL. Crossmark conecta para XRP. Só lemos o endereço público; nunca pedimos chave privada ou frase secreta.</div></div>
+<div class="c">
+<div id="wcs" style="display:flex;gap:6px;flex-wrap:wrap;margin:6px 0"></div>
+<div class="bar"><i id="wb"></i></div><small id="wl"></small>
+<input id="addr" placeholder="Endereço da carteira (simulado)">
+<button class="pr" id="wbtn" style="width:100%">Solicitar saque</button>
+<div class="warn">Modo demonstração: nenhum valor real é enviado.</div></div>
+<h2>Histórico</h2><div id="hist" class="sub">Nenhum saque ainda.</div>
+<button id="rst" style="width:100%;margin-top:8px">🗑️ Resetar progresso</button>
+<button id="boost" class="hide" style="width:100%;margin-top:14px">🎁 Modo teste: +3.000.000 VLX, +300.000 TRX/POL, +50.000.000 SHIB, +100.000 XRP, +500 SOL e 50.000 🔋</button>
+</section>
+<!-- Espaço reservado para publicidade futura. Permanece oculto e vazio: nenhum anúncio é carregado. Só remova o atributo "hidden" quando houver um provedor real configurado. -->
+<aside id="ad-slot" class="ad-slot" hidden aria-label="Publicidade"></aside>
+<div id="ft" class="sub" style="text-align:center;margin:26px 0 6px;line-height:1.9"><span id="ftv"></span><br><div class="spn"><div class="spn-t">PATROCINADORES</div><div class="spn-i"><img src="sydex-logo.png" alt="Sydex Labs" width="200" height="152"></div></div><a href="termos.html" target="_blank" rel="noopener">Termos de Uso</a> · <a href="privacidade.html" target="_blank" rel="noopener">Privacidade</a><span id="ftsp" class="hide"> · <a id="fts" href="#">Suporte</a> · <a id="ftr" href="#">Reportar problema</a></span><small>Jogo de simulação. Sem promessa de ganhos. Proibido para menores de 18 anos.</small></div>
+</div>
+
+<div id="ckb" class="hide" style="position:fixed;left:8px;right:8px;bottom:calc(74px + env(safe-area-inset-bottom,0px));z-index:12;background:#121829f2;border:1px solid var(--line);border-radius:14px;padding:10px 12px;font-size:12px;display:flex;gap:10px;align-items:center;max-width:740px;margin:auto"><span>Usamos o armazenamento do seu navegador para salvar sua conta e seu progresso e consultamos serviços externos para a cotação do dólar. Veja a <a href="privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span><button id="ckok" class="pr" style="padding:6px 12px;flex:none">OK</button></div>
+<div id="mnt" class="hide" style="position:fixed;inset:0;z-index:50;background:#080b14;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px"><div><div style="font-size:54px">🛠️</div><div class="lg-t" style="font-size:24px">Estamos em manutenção</div><div class="sub" id="mnm" style="font-size:14px"></div><button onclick="location.reload()" style="margin-top:12px">Tentar de novo</button></div></div>
+
+<div class="nav" id="nav">
+<button class="on" data-t="mine"><svg viewBox="0 0 24 24"><rect class="a" x="3" y="4" width="18" height="6" rx="1.5"/><rect class="a" x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01M11 7h6M11 17h6"/></svg>Sala</button>
+<button data-t="shop"><svg viewBox="0 0 24 24"><path class="a" d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/><path d="M9.5 12.5c.5 1 1.3 1.5 2.5 1.5s2-.5 2.5-1.5"/></svg>Loja</button>
+<button data-t="ads"><svg viewBox="0 0 24 24"><path class="a" d="M7 7h10a4 4 0 0 1 4 4.2l-.7 4.6a2.4 2.4 0 0 1-4.2 1.2L14.500 15h-5l-1.600 2a2.400 2.400 0 0 1-4.200-1.200L3 11.200A4 4 0 0 1 7 7z"/><path d="M8 10v3M6.500 11.500h3"/><path d="M15.500 10.500h.01M17.500 12.500h.01"/></svg>Jogos</button>
+<button data-t="ex"><svg viewBox="0 0 24 24"><path d="M4 8h13l-3-3M20 16H7l3 3"/><circle class="a" cx="12" cy="12" r="1.2"/></svg>Troca</button>
+<button data-t="xt"><svg viewBox="0 0 24 24"><path class="a" d="M8 4h8v5a4 4 0 0 1-8 0V4z"/><path d="M8 6H5a2 2 0 0 0 2 4M16 6h3a2 2 0 0 1-2 4"/><path d="M12 13v4M8.500 20h7M9.500 17h5"/></svg>Extras</button>
+<button data-t="wd"><svg viewBox="0 0 24 24"><rect class="a" x="3" y="7" width="18" height="12" rx="3"/><path d="M3 11h18"/><path d="M16.500 15h.01"/><path d="M6 7l9-2.500a1.500 1.500 0 0 1 2 1.400V7"/></svg>Saque</button>
+<button data-t="pf"><svg viewBox="0 0 24 24"><circle class="a" cx="12" cy="8" r="4"/><path d="M4 20c1-4 4-6 8-6s7 2 8 6"/></svg>Perfil</button>
+</div>
+<div id="au" class="hide"><div class="box"><div style="text-align:center;font-size:44px">⛏️</div><div class="lg-t">Bem-vindo ao CryptoMiner</div><div class="sub" style="text-align:center">Entre ou crie sua conta para começar a minerar</div>
+<div class="c"><div style="display:flex;gap:8px;margin-bottom:8px"><button id="aE" class="on" style="flex:1">Entrar</button><button id="aC" style="flex:1">Criar conta</button></div>
+<div id="aNw" class="hide"><input id="anm" placeholder="Seu nome" autocomplete="name"></div>
+<input id="aem" type="email" placeholder="E-mail" autocomplete="email"><input id="apw" type="password" placeholder="Senha (mín. 6 caracteres)" autocomplete="current-password">
+<label id="aTw" class="hide" style="display:flex;gap:8px;font-size:12px;margin:6px 0;align-items:flex-start"><input type="checkbox" id="atm" style="width:auto;margin:2px 0 0"><span>Tenho 18 anos ou mais e aceito os <a href="termos.html" target="_blank" rel="noopener">Termos de Uso</a> e a <a href="privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span></label>
+<div id="aer" style="color:var(--trx);font-size:12px;min-height:16px;margin-bottom:6px"></div>
+<button class="pr" id="ago" style="width:100%">Entrar</button>
+<div class="sub" id="aor" style="text-align:center;margin:10px 0">— ou —</div>
+<button id="agg" style="width:100%;background:#fff;color:#1f1f1f;font-weight:700;border:0"><span style="background:conic-gradient(from -45deg,#ea4335 0 25%,#fbbc05 0 50%,#34a853 0 75%,#4285f4 0);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:900;font-size:17px">G</span> Entrar com Google</button>
+<div class="warn">Modo demonstração: contas e progresso ficam salvos apenas neste navegador.</div></div></div></div>
+<div class="md hide" id="md"><div id="mb"></div></div>
+<div class="md hide" id="gm"><div id="gb"></div></div>
+
+<noscript><div class="warn" style="margin:16px">O CryptoMiner Tycoon precisa de JavaScript ativado no navegador para funcionar.</div></noscript>
+<script src="config-site.js"></script>
+<script src="app.js?v=1.0.0"></script>
+<!-- v4: troca de cripto + novo design -->
+<!-- v6: economia mais dificil + instalacao automatica -->
+<!-- v7: 10 placas com arte propria -->
+<!-- v8: economia dificil, precos fixos -->
+<!-- v9: escala x10 em creditos e cripto -->
+<!-- v10: logos das cripto -->
+<!-- v11: recompensas reduzidas -->
+<!-- v12: sem chuva de creditos -->
+<!-- v13: troca cripto por cripto -->
+<!-- v14: carteiras + 8 casas decimais -->
+<!-- v15: mini jogos -->
+<!-- v16: loja em cards -->
+<!-- v17: cards responsivos -->
+<!-- v18: 16 placas, nova escala -->
+<!-- v19: sistema de baterias -->
+<!-- v20: icones do menu -->
+<!-- v21: mais mini jogos, tempo e Caca-Hash novo -->
+<!-- v22: cards de mini jogos + 4 jogos novos -->
+<!-- v23: botoes dourados, Defesa da Rede, compra de creditos demo -->
+<!-- v24: login + compra de creditos por conta -->
+<!-- v25: aba Perfil com compra de creditos -->
+<!-- v26: ganhos e saques em dolar estilo Rollercoin -->
+<!-- v27: dashboard melhorado + explicacao dos ganhos -->
+<!-- v28: caixa misteriosa + pocoes -->
+<!-- dolar ao vivo (USD/BRL) -->
+</body>
+</html>
