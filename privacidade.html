@@ -1,13 +1,148 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Política de Privacidade · CryptoMiner</title><style>body{font-family:system-ui,sans-serif;background:#080b14;color:#e8eeff;max-width:760px;margin:0 auto;padding:20px;line-height:1.6}h1{background:linear-gradient(90deg,#ffb020,#ff5a8a,#a478ff);-webkit-background-clip:text;background-clip:text;color:transparent}h2{font-size:17px;margin-top:26px}a{color:#ffb020}.rev{background:#3a0f14;border:1px solid #ff5a5f;border-radius:10px;padding:10px 14px;font-size:14px}small{color:#8592b5}</style></head><body><p><a href="index.html">← Voltar ao jogo</a></p><h1>Política de Privacidade</h1><p class="rev"><b>MODELO PARA REVISÃO:</b> substitua os campos [entre colchetes] e peça a um advogado de direito digital para revisar antes de publicar. Depois apague este aviso.</p><small>Última atualização: [DATA]</small>
-<h2>1. Quem é o controlador</h2><p>[NOME OU RAZÃO SOCIAL], [CNPJ/CPF]. Contato e encarregado (DPO): [E-MAIL DE CONTATO].</p>
-<h2>2. Dados que tratamos</h2><ul><li><b>Cadastro:</b> nome, e-mail e senha (guardada apenas como hash, nunca em texto).</li><li><b>Jogo:</b> progresso, saldos simulados, equipamentos, histórico de compras e saques simulados, e endereços públicos de carteira que você optar por informar.</li><li><b>Técnicos:</b> dados que o navegador envia ao acessar serviços (como endereço IP e tipo de navegador).</li></ul>
-<h2>3. Onde os dados ficam</h2><p>Na versão atual, conta e progresso ficam <b>no armazenamento local do seu navegador</b> (localStorage), neste dispositivo. Se passarmos a usar servidores, esta política será atualizada antes.</p>
-<h2>4. Para que usamos (finalidades e bases legais – LGPD)</h2><p>Criar e manter sua conta e o progresso (execução do serviço); segurança e prevenção a fraudes (legítimo interesse); cumprir obrigações legais.</p>
-<h2>5. Serviços de terceiros</h2><p>Para mostrar a cotação do dólar, o navegador consulta serviços externos (AwesomeAPI e ExchangeRate-API), que podem receber seu endereço IP. Se você usar o login com Google, o Google trata os dados conforme a política dele. Carteiras (MetaMask, TronLink) são acessadas apenas para ler o <b>endereço público</b>; nunca pedimos chave privada ou frase secreta. [Se usar anúncios ou análises, liste aqui os fornecedores.]</p>
-<h2>6. Armazenamento local e cookies</h2><p>Usamos o armazenamento do navegador para manter sua sessão, conta e progresso. Você pode apagar esses dados nas configurações do navegador ou pelo botão "Excluir minha conta e dados" no Perfil.</p>
-<h2>7. Por quanto tempo</h2><p>Os dados ficam até você excluí-los. Dados de pedidos legais podem ser mantidos pelo prazo exigido em lei.</p>
-<h2>8. Seus direitos</h2><p>Você pode pedir confirmação de tratamento, acesso, correção, anonimização, portabilidade, eliminação e revogação de consentimento (art. 18 da LGPD). A exclusão e a exportação (portabilidade) estão no Perfil do Jogo; para outros pedidos escreva para [E-MAIL DE CONTATO].</p>
-<h2>9. Segurança</h2><p>Adotamos medidas razoáveis de segurança, mas nenhum sistema é 100% seguro. Mantenha sua senha em sigilo e não compartilhe sua conta.</p>
-<h2>10. Menores de idade</h2><p>O Jogo é destinado a maiores de 18 anos e não coletamos intencionalmente dados de menores.</p>
-<h2>11. Alterações</h2><p>Podemos atualizar esta política; a data de atualização fica no topo.</p>
-</body></html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Política de Privacidade · CryptoMiner Tycoon</title>
+<meta name="description" content="Política de Privacidade do CryptoMiner Tycoon: quais dados são usados, onde ficam armazenados, serviços de terceiros, anúncios e seus direitos.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#080b14">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<style>
+:root{color-scheme:dark;--bg:#080b14;--card:#121829;--line:#222c47;--tx:#e8eeff;--mu:#9aa6c7;--ac:#ffb020}
+*{box-sizing:border-box}
+body{margin:0;color:var(--tx);font-family:system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.65;background:radial-gradient(700px 400px at 15% -5%,#2a1f5c88,transparent),radial-gradient(800px 500px at 90% 0%,#0f3a6b77,transparent),linear-gradient(#080b14,#0a1020);background-attachment:fixed}
+.w{max-width:760px;margin:0 auto;padding:max(16px,env(safe-area-inset-top)) 16px 48px}
+.back{display:inline-block;margin:6px 0 14px;color:var(--ac);text-decoration:none;font-size:14px;font-weight:700}
+h1{font-size:26px;margin:0 0 4px;background:linear-gradient(90deg,#ffb020,#ff5a8a,#a478ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:17px;margin:26px 0 6px;color:var(--ac)}
+p,li{font-size:15px;color:#d5dcf2;overflow-wrap:anywhere}
+ul{padding-left:20px;margin:6px 0}
+.meta{color:var(--mu);font-size:13px;margin:0 0 14px}
+.box{background:linear-gradient(160deg,#151c32,var(--card));border:1px solid var(--line);border-left:4px solid var(--ac);border-radius:14px;padding:12px 14px;margin:14px 0}
+.box p{margin:0}
+.pend{background:#ffb02026;color:var(--ac);border:1px dashed var(--ac);border-radius:6px;padding:0 6px;font-weight:700;font-size:.92em}
+a{color:var(--ac)}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="w">
+<a class="back" href="./">← Voltar ao jogo</a>
+<h1>Política de Privacidade</h1>
+<p class="meta">CryptoMiner Tycoon · Última atualização: <span data-site="ATUALIZADO" class="pend">A PREENCHER: data</span></p>
+
+<div class="box" data-cloud="off"><p><b>Em resumo:</b> o CryptoMiner Tycoon é um jogo de simulação. Hoje ele <b>não tem servidor próprio de contas</b>: seu cadastro e progresso ficam salvos no <b>seu navegador</b>. O Jogo <b>não usa ferramentas de análise (analytics)</b>, <b>não exibe anúncios de terceiros</b> e <b>não usa cookies de rastreamento ou publicidade</b>.</p></div>
+<div class="box" data-cloud="on"><p><b>Em resumo:</b> o CryptoMiner Tycoon é um jogo de simulação. Para você entrar de qualquer aparelho, seu <b>cadastro (nome, e-mail e senha) e seu progresso de jogo são salvos em um servidor</b> do serviço Supabase. O Jogo <b>não usa ferramentas de análise (analytics)</b>, <b>não exibe anúncios de terceiros</b> e <b>não usa cookies de rastreamento ou publicidade</b>.</p></div>
+
+<h2>1. Quem é o responsável (controlador)</h2>
+<ul>
+<li>Responsável: <span data-site="NOME_RESPONSAVEL" class="pend">A PREENCHER: nome completo ou razão social</span></li>
+<li>CPF/CNPJ: <span data-site="DOCUMENTO" class="pend">A PREENCHER: CPF ou CNPJ</span></li>
+<li>Contato para assuntos de privacidade: <span data-site="EMAIL_CONTATO" class="pend">A PREENCHER: e-mail de contato</span></li>
+<li id="enc" class="hide">Encarregado de dados (LGPD): <span data-site="ENCARREGADO"></span></li>
+</ul>
+<p>Esta política segue a Lei Geral de Proteção de Dados (Lei nº 13.709/2018, LGPD).</p>
+
+<h2>2. Dados fornecidos por você</h2>
+<ul>
+<li><b>Cadastro:</b> nome, e-mail e senha, ao criar uma conta. Você também confirma que tem 18 anos ou mais e aceita os Termos de Uso.</li>
+<li><b>Carteiras:</b> se você conectar uma carteira (MetaMask, TronLink, Phantom ou Crossmark) ou digitar um endereço no campo de saque, guardamos o <b>endereço público</b>. Nunca pedimos nem armazenamos chave privada, frase de recuperação ou senha de carteira.</li>
+<li><b>Progresso de jogo:</b> equipamentos, saldos virtuais, missões, histórico simulado de compras e saques, preferências (como som ligado ou desligado) e a escolha de alocação de mineração.</li>
+<li><b>Contato:</b> se você nos escrever, receberemos seu e-mail e o conteúdo da mensagem.</li>
+</ul>
+
+<h2>3. Dados coletados automaticamente</h2>
+<ul>
+<li data-cloud="off">O Jogo <b>não envia</b> seu cadastro nem seu progresso para nenhum servidor nosso.</li>
+<li data-cloud="on">Ao criar conta e jogar, o Jogo <b>envia seu cadastro e seu progresso</b> ao servidor do Supabase (veja a seção 7). Esse servidor também pode registrar dados técnicos de acesso, como endereço IP e data e hora.</li>
+<li>Ao abrir o Jogo, seu navegador carrega os arquivos do site a partir do serviço de hospedagem. Esse serviço pode registrar dados técnicos de acesso (como endereço IP, data e hora, tipo de navegador e página solicitada) em logs de funcionamento e segurança, conforme as práticas do próprio provedor.</li>
+<li>O Jogo consulta periodicamente um arquivo de status do próprio site (<code>status.json</code>) para avisos de manutenção. Essa consulta não envia dados pessoais.</li>
+</ul>
+
+<h2>4. Armazenamento local (neste dispositivo)</h2>
+<p>O Jogo usa o <b>armazenamento local do navegador (localStorage)</b>, e não cookies, para guardar:</p>
+<ul>
+<li>sua conta (nome, e-mail e uma versão criptografada da senha, "hash" com sal) e a sessão ativa;</li>
+<li>seu progresso de jogo e carteiras conectadas;</li>
+<li>preferências (som) e o aviso de armazenamento já visto;</li>
+<li>o último valor conhecido da cotação do dólar, para exibir caso você esteja sem conexão.</li>
+</ul>
+<p data-cloud="off">Esses dados ficam somente no seu navegador e dispositivo. Eles podem ser apagados por você a qualquer momento (veja a seção Seus direitos). Quem tiver acesso ao seu aparelho e navegador pode acessá-los, por isso proteja o dispositivo.</p>
+<p data-cloud="on">Com a conta na nuvem, o navegador guarda também uma cópia local do progresso (para o Jogo funcionar rápido e sem internet) e o <b>token de sessão</b> do login, que o Supabase grava no armazenamento local. Ao sair da conta, essas cópias são removidas deste navegador. Quem tiver acesso ao seu aparelho enquanto você estiver conectado pode acessá-las, por isso proteja o dispositivo e saia da conta em computadores públicos.</p>
+
+<h2>5. Cookies</h2>
+<p>Atualmente o Jogo <b>não define cookies próprios</b> e não usa cookies de análise, de rastreamento ou de publicidade. Seu navegador ou o provedor de hospedagem podem utilizar cookies estritamente técnicos fora do nosso controle. Se passarmos a usar cookies que dependam de consentimento, esta política será atualizada e pediremos sua escolha antes.</p>
+
+<h2>6. Anúncios</h2>
+<ul>
+<li>No momento, o Jogo <b>não exibe anúncios de terceiros</b> e não compartilha dados com redes de publicidade.</li>
+<li>Os "anúncios" que aparecem como parte da jogabilidade (por exemplo, "Assistir anúncio") são <b>conteúdo simulado do próprio Jogo</b>, sem anunciante real e sem coleta de dados.</li>
+<li>Se, no futuro, o Jogo passar a exibir publicidade de terceiros, atualizaremos esta política <b>antes</b>, informando o fornecedor, quais dados ele pode coletar (por exemplo, identificadores de publicidade e cookies), a finalidade, e como você poderá gerenciar suas preferências, incluindo o pedido de consentimento quando a lei exigir.</li>
+</ul>
+
+<h2>7. Serviços de terceiros</h2>
+<p>Estes são os serviços externos realmente presentes no Jogo hoje:</p>
+<ul>
+<li><b>Cotação do dólar (USD/BRL):</b> para mostrar valores em reais, o seu navegador faz consultas à AwesomeAPI (economia.awesomeapi.com.br) e, se ela falhar, à ExchangeRate-API (open.er-api.com). Nessas consultas, por natureza da internet, esses serviços recebem seu endereço IP e dados técnicos do navegador. Não enviamos nome, e-mail nem dados de jogo. Cada serviço tem sua própria política de privacidade.</li>
+<li><b>Carteiras de criptomoedas (MetaMask, TronLink, Phantom, Crossmark):</b> são extensões instaladas por você no navegador. Quando você escolhe conectar, o Jogo lê o endereço público que a carteira fornece. O uso da carteira é regido pelos termos e pela política do respectivo desenvolvedor.</li>
+<li data-cloud="on"><b>Supabase (contas e progresso):</b> armazena seu nome, e-mail, a senha (guardada de forma criptografada, nunca em texto puro) e seu progresso de jogo. O Supabase atua como operador dos dados em nosso nome, e os servidores podem estar fora do Brasil, o que pode envolver transferência internacional de dados, com as salvaguardas previstas na LGPD. Política do Supabase: supabase.com/privacy.</li>
+<li data-cloud="on"><b>jsDelivr (biblioteca):</b> o navegador baixa a biblioteca de login do Supabase por meio da rede de entrega de conteúdo jsDelivr, que recebe seu endereço IP e dados técnicos do navegador nesse momento.</li>
+<li><b>Hospedagem:</b> o provedor onde o site estiver publicado pode registrar logs de acesso, conforme descrito na seção 3.</li>
+<li><b>Login com Google:</b> existe preparação técnica no código, mas o recurso está <b>desativado</b> e não é carregado. Se for ativado, esta política será atualizada antes.</li>
+</ul>
+<p>O Jogo não usa Google Analytics, Meta Pixel ou ferramentas semelhantes de análise ou rastreamento.</p>
+
+<h2>8. Para que usamos os dados (finalidades e bases legais)</h2>
+<ul>
+<li>Permitir criar conta, entrar e manter seu progresso de jogo (execução do serviço que você solicitou);</li>
+<li>Exibir cotações e valores de referência (legítimo interesse e execução do serviço);</li>
+<li>Manter a segurança, prevenir abusos e resolver problemas (legítimo interesse);</li>
+<li>Responder mensagens que você enviar (consentimento / atendimento de solicitação);</li>
+<li>Cumprir obrigações legais, quando houver.</li>
+</ul>
+<p>Não vendemos dados pessoais.</p>
+
+<h2>9. Compartilhamento</h2>
+<p>Não compartilhamos seus dados pessoais com terceiros, exceto: (a) as consultas técnicas descritas na seção 7; (b) se for exigido por lei ou ordem de autoridade competente.</p>
+
+<h2>10. Segurança</h2>
+<ul>
+<li data-cloud="off">A senha não é guardada em texto puro: o Jogo armazena apenas um "hash" com sal, calculado no seu navegador.</li>
+<li data-cloud="on">A senha não é guardada em texto puro: o Supabase armazena apenas um "hash" dela. A comunicação com o servidor usa conexão criptografada (HTTPS) e o acesso ao banco é restrito, de modo que cada conta só consegue ler e alterar o próprio progresso.</li>
+<li>Como os dados ficam no seu dispositivo, a segurança depende também de você: use um aparelho e navegador protegidos, não compartilhe sua conta e evite computadores públicos.</li>
+<li>Nunca informe chave privada ou frase de recuperação de carteira em nenhum site, inclusive neste Jogo. Nós nunca pedimos isso.</li>
+<li>Nenhum sistema é totalmente seguro, e não podemos garantir segurança absoluta.</li>
+</ul>
+
+<h2>11. Retenção</h2>
+<p data-cloud="off">Como os dados ficam no seu navegador, eles permanecem até você apagá-los (pela função de exclusão no Perfil ou limpando os dados do navegador).</p>
+<p data-cloud="on">Os dados da conta e do progresso ficam no servidor enquanto a conta existir e são apagados quando você usa "Excluir minha conta e dados" no Perfil. Limpar os dados do navegador não apaga a conta na nuvem.</p>
+<p>Mensagens enviadas ao nosso e-mail de contato são mantidas pelo tempo necessário para atendimento e obrigações legais.</p>
+
+<h2>12. Seus direitos (LGPD)</h2>
+<p>Você pode solicitar: confirmação de tratamento, acesso, correção, anonimização, bloqueio ou eliminação de dados desnecessários, portabilidade, informação sobre compartilhamento e revogação de consentimento, entre outros direitos do art. 18 da LGPD. Na prática:</p>
+<ul>
+<li><b>Acesso e portabilidade:</b> na aba Perfil, use "Exportar progresso" para baixar seus dados de jogo em arquivo.</li>
+<li data-cloud="off"><b>Exclusão:</b> na aba Perfil, use "Excluir minha conta e dados" para apagar definitivamente conta, progresso e carteiras salvas neste navegador.</li>
+<li data-cloud="on"><b>Exclusão:</b> na aba Perfil, use "Excluir minha conta e dados" para apagar definitivamente sua conta, seu progresso e as carteiras salvas, tanto no servidor quanto neste navegador.</li>
+<li data-cloud="on"><b>Correção:</b> você pode alterar a senha pelo link "Esqueci minha senha" na tela de login. Para corrigir o nome ou o e-mail, escreva para o contato abaixo.</li>
+<li><b>Demais pedidos:</b> escreva para o contato abaixo. Você também pode reclamar à Autoridade Nacional de Proteção de Dados (ANPD).</li>
+</ul>
+
+<h2>13. Crianças e adolescentes</h2>
+<p>O Jogo é destinado a maiores de 18 anos e não coleta dados de menores de forma intencional. Se você acredita que um menor criou uma conta, avise-nos para que possamos orientar a exclusão.</p>
+
+<h2>14. Alterações desta política</h2>
+<p>Podemos atualizar esta política, por exemplo ao ativar contas em servidor, análises, pagamentos, saques ou anúncios. A data da última atualização aparece no topo desta página, e mudanças relevantes serão comunicadas no próprio Jogo.</p>
+
+<h2>15. Contato</h2>
+<p>Para dúvidas e solicitações sobre privacidade: <span data-site="EMAIL_CONTATO" class="pend">A PREENCHER: e-mail de contato</span></p>
+<p>Veja também os <a href="termos.html">Termos de Uso</a>.</p>
+</div>
+<script src="config-site.js"></script>
+<script>
+(function(){var S=window.SITE||{},ON=!!(S.SUPABASE_URL&&S.SUPABASE_ANON_KEY);document.querySelectorAll('[data-cloud]').forEach(function(el){if((el.getAttribute('data-cloud')==='on')!==ON)el.style.display='none'});document.querySelectorAll('[data-site]').forEach(function(el){var v=S[el.getAttribute('data-site')];if(v){el.textContent=v;el.classList.remove('pend')}});if(S.ENCARREGADO){var e=document.getElementById('enc');if(e)e.classList.remove('hide')}})();
+</script>
+</body>
+</html>

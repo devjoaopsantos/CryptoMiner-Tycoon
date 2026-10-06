@@ -49,7 +49,6 @@ const fxa=()=>Object.values(S.fx).filter(e=>e.u>Date.now()),fxp=()=>fxa().reduce
 const fxl=()=>fxp()!==1?` · 🧪 poder x${+fxp().toFixed(2)}`:'';
 const $=i=>document.getElementById(i);
 const f=(n,d=2)=>n>=1e9?(n/1e9).toFixed(2)+'B':n>=1e6?(n/1e6).toFixed(2)+'M':n.toLocaleString('pt-BR',{maximumFractionDigits:d});
-var LIVE={live:false,t:0,src:'',p:{}};
 var BRL={v:5.5,t:0,live:false,dir:0,src:''};try{const c=JSON.parse(localStorage.getItem('cm_brl')||'null');if(c&&c.v>0){BRL.v=c.v;BRL.t=c.t}}catch(e){}
 var EV=null,nextEv=Date.now()+45000;
 const REF={POL:0.25,TRX:0.3,SHIB:0.00002,XRP:0.6,SOL:150},BASE={TRX:0.3*25000,POL:0.25*25000,SHIB:0.00002*25000,XRP:0.6*25000,SOL:150*25000},VOL={TRX:.03,POL:.03,SHIB:.06,XRP:.04,SOL:.045},RG={TRX:.3,POL:.3,SHIB:.5,XRP:.35,SOL:.4};let P={...BASE},Pp={...BASE};
@@ -77,7 +76,7 @@ const owned=id=>(S.inv[id]||0)+S.slots.filter(x=>x===id).length;
 const cost=x=>x.c;
 const slotCost=()=>250000*Math.pow(2,S.slots.length-4);
 function tick(sec,h){if(h<=0||S.en<=0)return;const cs=h*0.01*fxe();if(cs*sec>S.en)sec=S.en/cs;S.en=Math.max(0,S.en-cs*sec);for(const c of COINS){const e=eps(c,h*fr(c))*sec;S[c]+=e;S.tm+=e*usd(c)}S.cr+=h*0.2*sec*fxc()}
-function save(){if(!SK)return;try{localStorage.setItem(SK,JSON.stringify(S))}catch(e){}}
+function save(){if(!SK)return;S.sv=Date.now();try{localStorage.setItem(SK,JSON.stringify(S))}catch(e){}if(CLOUD.on&&USR&&USR.cloud)CLOUD.queue(S)}
 var OFF=null;{const d=Math.min((Date.now()-S.last)/1000,28800);if(d>5){const c0=S.cr,m0=S.tm;tick(d*0.5,base());OFF={d,cr:S.cr-c0,m:S.tm-m0}}S.last=Date.now()}
 /* ▸▸▸ SEÇÃO: SALA, LOJA DE EQUIPAMENTOS, JANELAS (MODAIS), ANÚNCIO E TELA DE SAQUE */
 function rack(){$('slots').innerHTML=S.slots.map((id,i)=>{const x=id&&IT.find(z=>z.id===id);
@@ -134,13 +133,13 @@ $('ls').innerHTML=lgi('SHIB')+' SHIB';$('lxr').innerHTML=lgi('XRP')+' XRP';$('ls
 
 /* ▸▸▸ SEÇÃO: CÂMBIO: cotações e venda de cripto por VLX */
 let xc='TRX';
-setInterval(()=>{if(LIVE.live&&Date.now()-LIVE.t>90000)LIVE.live=false;if(!LIVE.live)for(const c in P){Pp[c]=P[c];const B0=LIVE.p[c]?LIVE.p[c]*BASE[c]/REF[c]:BASE[c];P[c]=Math.min(B0*(1+RG[c]),Math.max(B0*(1-RG[c]),P[c]*(1+(Math.random()-.5)*VOL[c])))}ui()},3000);
+setInterval(()=>{for(const c in P){Pp[c]=P[c];P[c]=Math.min(BASE[c]*(1+RG[c]),Math.max(BASE[c]*(1-RG[c]),P[c]*(1+(Math.random()-.5)*VOL[c])))}ui()},3000);
 const amt=()=>Math.min(S[xc],Math.max(0,parseFloat($('xa').value.replace(',','.'))||0));
 function exc(){const p=P[xc],up=p>=Pp[xc],a=amt();
 cls('xcs',xc);
 $('xp').innerHTML=`1 ${lgi(xc)} ${xc} = <b class="a">${f(p*vip(),2)} ${CI}</b> <span class="${up?'ok':'t'}">${up?'▲':'▼'}</span>`;
 $('xb').textContent=`Saldo: ${fx(S[xc])} ${xc}`;$('xr').innerHTML=`Você recebe: ${f(a*p*vip(),0)} ${CI}`;const bl=EV&&EV.k==='bull'?1.5:1;
-$('qt').innerHTML=`<small><span class="live"></span>${LIVE.live?'Cotação AO VIVO · '+LIVE.src:'Cotação simulada (sem conexão)'} · ${new Date().toLocaleTimeString('pt-BR')}</small>`+COINS.map(c=>`<div class="rk"><span>${lgi(c)} ${c}</span><span><b class="a">${f(P[c]*bl,2)} ${CI}</b> <span style="color:var(--mu);font-size:11px">US$ ${f(usd(c),c==='SHIB'?8:4)}</span> <span class="${P[c]>=Pp[c]?'ok':'t'}">${P[c]>=Pp[c]?'▲':'▼'}</span></span></div>`).join('')+`<div class="rk"><span>Relação</span><span>1 TRX = ${fx(P.TRX/P.POL)} POL</span></div>`;
+$('qt').innerHTML=`<small><span class="live"></span>Cotação ao vivo · ${new Date().toLocaleTimeString('pt-BR')}</small>`+COINS.map(c=>`<div class="rk"><span>${lgi(c)} ${c}</span><span><b class="a">${f(P[c]*bl,2)} ${CI}</b> <span style="color:var(--mu);font-size:11px">US$ ${f(usd(c),c==='SHIB'?8:4)}</span> <span class="${P[c]>=Pp[c]?'ok':'t'}">${P[c]>=Pp[c]?'▲':'▼'}</span></span></div>`).join('')+`<div class="rk"><span>Relação</span><span>1 TRX = ${fx(P.TRX/P.POL)} POL</span></div>`;
 $('xs').disabled=a<=0;swp()}
 coinRow('xcs',c=>{xc=c;exc()});$('xa').oninput=exc;
 document.querySelectorAll('[data-pc]').forEach(b=>b.onclick=()=>{$('xa').value=(Math.floor(S[xc]*b.dataset.pc*1e8)/1e8).toString();exc()});
@@ -441,6 +440,7 @@ $('aE').onclick=()=>amd('in');$('aC').onclick=()=>amd('up');
 $('ago').onclick=async()=>{const em=$('aem').value.trim().toLowerCase(),pw=$('apw').value,nm=$('anm').value.trim(),er=$('aer');er.textContent='';
 if(!/^\S+@\S+\.\S+$/.test(em)){er.textContent='Informe um e-mail válido.';return}
 if(pw.length<6){er.textContent='A senha precisa ter pelo menos 6 caracteres.';return}
+if(CLOUD.on){await cloudAuth(em,pw,nm,er);return}
 let u=null;try{u=JSON.parse(localStorage.getItem('cm_u_'+em))}catch(e){}
 if(amode==='up'){if(nm.length<2){er.textContent='Informe seu nome.';return}if(!$('atm').checked){er.textContent='Para criar a conta, confirme que tem 18 anos ou mais e aceita os termos.';return}if(u){er.textContent='Já existe uma conta com esse e-mail. Use Entrar.';return}
 const salt=Math.random().toString(36).slice(2);u={email:em,name:nm,salt,ph:await hpw(pw,salt),t:Date.now()};
@@ -452,7 +452,59 @@ $('agg').onclick=()=>{if(!GCID){modal(`<b>Entrar com Google (demo)</b><p class="
 const sc=document.createElement('script');sc.src='https://accounts.google.com/gsi/client';sc.onload=()=>{google.accounts.id.initialize({client_id:GCID,callback:r=>{try{const p=JSON.parse(decodeURIComponent(escape(atob(r.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')))));gLogin(p.email,p.name)}catch(e){}}});google.accounts.id.prompt()};document.head.appendChild(sc)};
 $('mb').addEventListener('click',e=>{if(e.target.id==='gok'){const em=$('gem').value.trim();if(/^\S+@\S+\.\S+$/.test(em))gLogin(em,$('gnm').value.trim())}});
 if(!USR)$('au').classList.remove('hide');
-else{$('lgo').className='';$('lgo').textContent='👤 '+USR.name.split(' ')[0];$('lgo').onclick=()=>document.querySelector('[data-t="pf"]').click();$('pfo').onclick=()=>{try{localStorage.removeItem('cm_sess')}catch(e){}location.reload()};setTimeout(()=>toast('Bem-vindo ao CryptoMiner, '+USR.name.split(' ')[0]+'! ⛏️'),500)}
+else{$('lgo').className='';$('lgo').textContent='👤 '+USR.name.split(' ')[0];$('lgo').onclick=()=>document.querySelector('[data-t="pf"]').click();$('pfo').onclick=async()=>{if(CLOUD.on&&USR.cloud){$('pfo').disabled=true;const ok=await CLOUD.flush();await CLOUD.signOut();noSess();if(ok){lsDel('cmu_'+USR.email);lsDel('cmu_'+USR.email+'_bak');lsDel('cm_u_'+USR.email);lsDel('cm_base_'+USR.email)}location.reload();return}try{localStorage.removeItem('cm_sess')}catch(e){}location.reload()};setTimeout(()=>toast('Bem-vindo ao CryptoMiner, '+USR.name.split(' ')[0]+'! ⛏️'),500)}
+/* ▸▸▸ SEÇÃO: NUVEM (contas e progresso no servidor; só ativa com Supabase configurado) */
+function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function lsSet(k,v){try{localStorage.setItem(k,v);return true}catch(e){return false}}
+function lsDel(k){try{localStorage.removeItem(k)}catch(e){}}
+function noSess(){lsDel('cm_sess')}
+/* grava a conta no cache local, junta o progresso local com o da nuvem e entra no jogo */
+async function cloudStart(user){
+ const em=String(user.email||'').toLowerCase(),nm=(user.user_metadata&&user.user_metadata.name)||em.split('@')[0];
+ CLOUD.key='cm_base_'+em;
+ const r=await CLOUD.pull();if(r.error)return r.error;
+ const loc=lsGet('cmu_'+em);let ls=null;try{ls=loc&&JSON.parse(loc)}catch(e){}
+ if(r.row&&r.row.data){const rs=Number(r.row.sv)||0,b=CLOUD.getBase();if(!ls||(b?rs>b:rs>=(Number(ls.sv)||0))){if(loc)lsSet('cmu_'+em+'_bak',loc);lsSet('cmu_'+em,JSON.stringify(r.row.data))}CLOUD.setBase(rs)}
+ else if(ls){const p=await CLOUD.push(ls);if(p.error)return p.error}
+ if(!lsSet('cm_u_'+em,JSON.stringify({email:em,name:nm,cloud:1,t:Date.now()})))return'Não foi possível salvar a conta neste navegador.';
+ start(em);return''}
+async function cloudAuth(em,pw,nm,er){
+ const go=$('ago');
+ if(amode==='up'){if(nm.length<2){er.textContent='Informe seu nome.';return}if(!$('atm').checked){er.textContent='Para criar a conta, confirme que tem 18 anos ou mais e aceita os termos.';return}}
+ go.disabled=true;er.style.color='var(--mu)';er.textContent='Conectando…';
+ const r=amode==='up'?await CLOUD.signUp(em,pw,nm):await CLOUD.signIn(em,pw);
+ er.style.color='';go.disabled=false;er.textContent='';
+ if(r.error){er.textContent=r.error;return}
+ if(r.confirm){er.style.color='var(--ok)';er.textContent='Conta criada! Enviamos um e-mail de confirmação. Abra o link e depois entre.';return}
+ go.disabled=true;const m=await cloudStart(r.user);if(m){go.disabled=false;er.textContent=m}}
+if(CLOUD.on){
+ $('alw2').textContent='Sua conta e seu progresso ficam salvos com segurança na nuvem e acompanham você em qualquer aparelho.';
+ $('afg').classList.remove('hide');
+ $('afg').onclick=async()=>{const em=$('aem').value.trim().toLowerCase(),er=$('aer');er.style.color='';
+  if(!/^\S+@\S+\.\S+$/.test(em)){er.textContent='Digite seu e-mail acima e toque em "Esqueci minha senha".';return}
+  er.style.color='var(--mu)';er.textContent='Enviando…';const r=await CLOUD.reset(em);er.style.color='';
+  if(r.error){er.textContent=r.error;return}
+  er.style.color='var(--ok)';er.textContent='Se existir uma conta com esse e-mail, enviamos um link para criar uma nova senha.'};
+ const rec=/type=recovery/.test(location.hash);
+ if(rec){CLOUD.onRecovery(()=>modal('<b>🔑 Nova senha</b><p class="sub">Escolha a nova senha da sua conta.</p><input id="npw" type="password" placeholder="Nova senha (mín. 6 caracteres)" autocomplete="new-password"><div id="nper" style="color:var(--trx);font-size:12px;min-height:16px;margin:6px 0"></div><button class="pr" id="npok" style="width:100%">Salvar nova senha</button>'));CLOUD.client()}
+ $('mb').addEventListener('click',async e=>{if(e.target.id!=='npok')return;const pw=$('npw').value,er=$('nper');
+  if(pw.length<6){er.textContent='A senha precisa ter pelo menos 6 caracteres.';return}
+  e.target.disabled=true;const r=await CLOUD.setPassword(pw);
+  if(r.error){e.target.disabled=false;er.textContent=r.error;return}
+  history.replaceState(null,'',location.pathname+location.search);const m=await cloudStart(r.user);if(m){e.target.disabled=false;er.textContent=m}});
+ if(!USR&&!rec){/* voltou do link de confirmação de e-mail, ou ainda há sessão válida */
+  (async()=>{const s=await CLOUD.session();if(s&&s.user){history.replaceState(null,'',location.pathname+location.search);const m=await cloudStart(s.user);if(m)toast(m)}})()}
+ if(USR&&USR.cloud){
+  CLOUD.key='cm_base_'+USR.email;
+  CLOUD.onConflict=async()=>{const r=await CLOUD.pull();if(r.row&&r.row.data){const old=lsGet(SK);if(old)lsSet(SK+'_bak',old);lsSet(SK,JSON.stringify(r.row.data));CLOUD.setBase(Number(r.row.sv)||0);save=()=>{};toast('☁️ Seu progresso foi atualizado com a versão mais recente da nuvem.');setTimeout(()=>location.reload(),1500)}};
+  const sync=async()=>{const s=await CLOUD.session();
+   if(!s){if(navigator.onLine===false){addEventListener('online',sync,{once:true});return}toast('Sua sessão expirou. Entre novamente.');noSess();setTimeout(()=>location.reload(),1200);return}
+   const r=await CLOUD.pull();if(r.error)return;
+   const lv=Number(S.sv)||0,b=CLOUD.getBase(),rs=r.row?Number(r.row.sv)||0:0;
+   if(r.row&&r.row.data&&(b?rs>b:rs>lv)){const old=lsGet(SK);if(old)lsSet(SK+'_bak',old);lsSet(SK,JSON.stringify(r.row.data));CLOUD.setBase(rs);save=()=>{};location.reload()}
+   else{if(r.row&&!b)CLOUD.setBase(rs);if(!S.sv)S.sv=Date.now();CLOUD.queue(S)}};
+  sync()}
+}
 /* ▸▸▸ SEÇÃO: PERFIL */
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const RANKS=[['Recruta',0,'#8d9abb'],['Minerador',50,'#3ee0a0'],['Operador',500,'#4aa3ff'],['Engenheiro',5000,'#b46bff'],['Mestre Hash',50000,'#ffb020'],['Lenda Voltrix',500000,'#ff5a8a']];
@@ -505,9 +557,9 @@ $('pff').onchange=e=>{const f=e.target.files[0];e.target.value='';if(!f)return;c
   modal('<b>Importar progresso?</b><p class="sub">Isso substitui o progresso atual desta conta.</p><button class="pr" id="imok" style="width:100%">Importar</button><button data-x="1" style="width:100%;margin-top:8px">Cancelar</button>')}
  catch(x){modal('<b>Arquivo inválido</b><p class="sub">Escolha um arquivo exportado pelo próprio jogo.</p><button data-x="1" style="width:100%">Ok</button>')}};r.readAsText(f)};
 $('pfd').onclick=()=>modal('<b>Excluir minha conta e dados?</b><p class="sub">Isso apaga <b>definitivamente</b> a conta, o progresso e as carteiras salvas <b>neste navegador</b>. Não dá para desfazer.</p><button class="pr" id="dlok" style="width:100%;background:#ff5a5f;color:#fff">Sim, excluir tudo</button><button data-x="1" style="width:100%;margin-top:8px">Cancelar</button>');
-$('mb').addEventListener('click',e=>{
+$('mb').addEventListener('click',async e=>{
  if(e.target.id==='imok'&&window.__imp){S=Object.assign(S,window.__imp);save();location.reload()}
- if(e.target.id==='dlok'){save=()=>{};try{if(USR){localStorage.removeItem('cm_u_'+USR.email);localStorage.removeItem('cmu_'+USR.email)}localStorage.removeItem('cm_sess')}catch(x){}location.reload()}});
+ if(e.target.id==='dlok'){if(CLOUD.on&&USR&&USR.cloud){e.target.disabled=true;const r=await CLOUD.deleteAccount();if(r.error){e.target.disabled=false;toast(r.error);return}lsDel('cmu_'+USR.email+'_bak');lsDel('cm_base_'+USR.email)}save=()=>{};try{if(USR){localStorage.removeItem('cm_u_'+USR.email);localStorage.removeItem('cmu_'+USR.email)}localStorage.removeItem('cm_sess')}catch(x){}location.reload()}});
 /* ▸▸▸ SEÇÃO: COTAÇÃO DO DÓLAR (USD/BRL) */
 async function ftj(u){const ac=new AbortController(),tm=setTimeout(()=>ac.abort(),6000);try{const r=await fetch(u,{cache:'no-store',signal:ac.signal});if(!r.ok)throw new Error('http');return await r.json()}finally{clearTimeout(tm)}}
 async function dolar(){let v=0,src='';
@@ -522,24 +574,14 @@ $('brlc').innerHTML=BRL.dir>0?'<span class="ok">▲</span>':BRL.dir<0?'<span cla
 const st=$('brls');st.textContent=BRL.live?'● AO VIVO':'○ OFFLINE';st.style.background=BRL.live?'':'#ffb02033';st.style.color=BRL.live?'':'var(--ac)';
 $('brlt').textContent=BRL.live?'atualizado '+new Date(BRL.t).toLocaleTimeString('pt-BR')+' · '+BRL.src:(BRL.t?'sem conexão · último valor de '+new Date(BRL.t).toLocaleTimeString('pt-BR'):'sem conexão · valor de referência');
 try{pq()}catch(e){}}
-dolar();setInterval(dolar,30000);
-/* ▸▸▸ SEÇÃO: COTAÇÃO AO VIVO DAS CRIPTOMOEDAS (US$) — Binance, com CoinGecko de reserva; sem internet usa simulação */
-const MK={TRX:'TRXUSDT',POL:'POLUSDT',SHIB:'SHIBUSDT',XRP:'XRPUSDT',SOL:'SOLUSDT'},CG={TRX:'tron',POL:'polygon-ecosystem-token',SHIB:'shiba-inu',XRP:'ripple',SOL:'solana'};
-try{const c=JSON.parse(localStorage.getItem('cm_mkt')||'null');if(c&&c.p&&Date.now()-c.t<216e5)COINS.forEach(k=>{if(c.p[k]>0){LIVE.p[k]=c.p[k];P[k]=c.p[k]*BASE[k]/REF[k]}})}catch(e){}
-function mkApply(p,src){let ok=0;COINS.forEach(c=>{const v=+p[c];if(v>0){LIVE.p[c]=v;Pp[c]=P[c];P[c]=v*BASE[c]/REF[c];ok++}});
-if(ok===COINS.length){LIVE.live=true;LIVE.t=Date.now();LIVE.src=src;try{localStorage.setItem('cm_mkt',JSON.stringify({p:LIVE.p,t:LIVE.t}))}catch(e){}}}
-async function mercado(){let p=null,src='';
-try{const j=await ftj('https://api.binance.com/api/v3/ticker/price?symbols='+encodeURIComponent(JSON.stringify(COINS.map(c=>MK[c]))));p={};j.forEach(x=>{const c=COINS.find(z=>MK[z]===x.symbol);if(c)p[c]=+x.price});src='Binance'}catch(e){p=null}
-if(!p||COINS.some(c=>!(p[c]>0))){try{const j=await ftj('https://api.coingecko.com/api/v3/simple/price?ids='+COINS.map(c=>CG[c]).join(',')+'&vs_currencies=usd');p={};COINS.forEach(c=>p[c]=j[CG[c]]&&j[CG[c]].usd);src='CoinGecko'}catch(e){p=null}}
-if(p)mkApply(p,src);if(LIVE.live&&Date.now()-LIVE.t>90000)LIVE.live=false;ui();if(!$('pf').classList.contains('hide')){try{pq()}catch(e){}}}
-mercado();setInterval(mercado,10000);
+dolar();setInterval(dolar,60000);
 $('adb').onclick=ad;
 /* ▸▸▸ SEÇÃO: ALOCAÇÃO DE MINERAÇÃO, FILTRO DE MOEDAS E SAQUE */
 function coinRow(id,fn){$(id).innerHTML=COINS.map(c=>`<button data-c="${c}" style="flex:1;min-width:64px">${lgi(c)} ${c}</button>`).join('');$(id).onclick=e=>{const b=e.target.closest('[data-c]');if(b)fn(b.dataset.c)}}
 function cls(id,v){document.querySelectorAll('#'+id+' button').forEach(b=>b.className=b.dataset.c===v?'on':'')}
 function alb(){$('alw').innerHTML=COINS.map(c=>`<div data-ar="${c}"><div style="margin:8px 0 2px;display:flex;justify-content:space-between;font-weight:700"><span>${lgi(c)} ${c}</span><span id="av${c}"></span></div><input type="range" data-al="${c}" min="0" max="100" step="5"></div>`).join('')+'<div id="alt" style="margin-top:10px;font-size:12px;font-weight:700"></div><div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">'+COINS.map(c=>`<button data-a100="${c}" style="flex:1;min-width:90px;font-size:12px">${lgi(c)} 100%</button>`).join('')+'<button data-aeq="1" style="flex:1;min-width:90px;font-size:12px">⚖️ Igual</button></div>'}
 function heroUpd(){const set=(i,h)=>{const e=$(i);if(e&&e.innerHTML!==h)e.innerHTML=h},best=Math.max(...COINS.map(c=>S[c]*usd(c)));
-set('hb_shop',`${CI} ${f(S.cr,0)} VLX`);set('hb_ads',bon()>0?`⚡ +${f(bon(),0)} GH/s ativo`:'⚡ Sem boost');set('hb_ex',LIVE.live?'<span class="live"></span>Ao vivo · '+LIVE.src:'Simulado');set('hb_xt',`🔥 ${S.streak||0} dia(s)`);set('hb_wd',`💵 US$ ${f(best,2)}`)}
+set('hb_shop',`${CI} ${f(S.cr,0)} VLX`);set('hb_ads',bon()>0?`⚡ +${f(bon(),0)} GH/s ativo`:'⚡ Sem boost');set('hb_ex','<span class="live"></span>Mercado ao vivo');set('hb_xt',`🔥 ${S.streak||0} dia(s)`);set('hb_wd',`💵 US$ ${f(best,2)}`)}
 function vis(){const run=base()>0&&S.en>0;let n=0,na=0;
 COINS.forEach(c=>{const e=$(c.toLowerCase()),k=e&&e.closest('.c'),on=S[c]>0||(S.al[c]>0&&run);if(on)n++;if(S.al[c]>0)na++;if(k)k.style.display=(S.vc||on)?'':'none'});
 [['tgC',S.vc,n],['tgA',S.va,na]].forEach(([id,on,k])=>{const b=$(id),h=on?'▼ Todas as moedas':`▲ Só minerando (${k}/${COINS.length})`;if(b&&b.innerHTML!==h)b.innerHTML=h})}

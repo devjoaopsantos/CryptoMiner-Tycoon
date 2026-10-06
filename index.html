@@ -62,7 +62,7 @@
 <div style="display:flex;gap:6px;margin-bottom:8px"><button data-pc="0.25" style="flex:1">25%</button><button data-pc="0.5" style="flex:1">50%</button><button data-pc="1" style="flex:1">Tudo</button></div>
 <div class="c" style="text-align:center;margin-bottom:8px"><b id="xr" class="ok"></b></div>
 <button class="pr" id="xs" style="width:100%">Vender</button>
-<div class="warn">A cotação segue o preço real do mercado em dólar e atualiza a cada 10 segundos (se estiver sem internet, usa uma simulação). Venda quando estiver alto! VLX serve para comprar equipamentos e slots.</div></div>
+<div class="warn">A cotação é atualizada a cada 3 segundos (até ±30% do valor base). Venda quando estiver alto! VLX serve para comprar equipamentos e slots.</div></div>
 <h2>🔄 Trocar cripto por cripto</h2>
 <div class="c"><div style="display:flex;justify-content:space-between;align-items:center"><b id="sd"></b><button id="sflip" style="padding:6px 12px">⇄ Inverter</button></div>
 <div id="spk" style="margin-top:8px"></div><div id="sq" style="margin:10px 0 4px;font-size:15px"></div><small id="sb"></small>
@@ -111,7 +111,7 @@
 </section>
 <!-- Espaço reservado para publicidade futura. Permanece oculto e vazio: nenhum anúncio é carregado. Só remova o atributo "hidden" quando houver um provedor real configurado. -->
 <aside id="ad-slot" class="ad-slot" hidden aria-label="Publicidade"></aside>
-<div id="ft" class="sub" style="text-align:center;margin:26px 0 6px;line-height:1.9"><span id="ftv"></span><br><div class="spn"><div class="spn-t">PATROCINADORES</div><div class="spn-i"><img src="sydex-logo.png" alt="Sydex Labs" width="200" height="152"></div></div><a href="termos.html" target="_blank" rel="noopener">Termos de Uso</a> · <a href="privacidade.html" target="_blank" rel="noopener">Privacidade</a><span id="ftsp" class="hide"> · <a id="fts" href="#">Suporte</a> · <a id="ftr" href="#">Reportar problema</a></span><small>Jogo de simulação. Sem promessa de ganhos. Proibido para menores de 18 anos.</small></div>
+<div id="ft" class="sub" style="text-align:center;margin:26px 0 6px;line-height:1.9"><span id="ftv"></span><br><a href="termos.html" target="_blank" rel="noopener">Termos de Uso</a> · <a href="privacidade.html" target="_blank" rel="noopener">Privacidade</a><span id="ftsp" class="hide"> · <a id="fts" href="#">Suporte</a> · <a id="ftr" href="#">Reportar problema</a></span><small>Jogo de simulação. Sem promessa de ganhos. Proibido para menores de 18 anos.</small></div>
 </div>
 
 <div id="ckb" class="hide" style="position:fixed;left:8px;right:8px;bottom:calc(74px + env(safe-area-inset-bottom,0px));z-index:12;background:#121829f2;border:1px solid var(--line);border-radius:14px;padding:10px 12px;font-size:12px;display:flex;gap:10px;align-items:center;max-width:740px;margin:auto"><span>Usamos o armazenamento do seu navegador para salvar sua conta e seu progresso e consultamos serviços externos para a cotação do dólar. Veja a <a href="privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span><button id="ckok" class="pr" style="padding:6px 12px;flex:none">OK</button></div>
@@ -133,14 +133,16 @@
 <label id="aTw" class="hide" style="display:flex;gap:8px;font-size:12px;margin:6px 0;align-items:flex-start"><input type="checkbox" id="atm" style="width:auto;margin:2px 0 0"><span>Tenho 18 anos ou mais e aceito os <a href="termos.html" target="_blank" rel="noopener">Termos de Uso</a> e a <a href="privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span></label>
 <div id="aer" style="color:var(--trx);font-size:12px;min-height:16px;margin-bottom:6px"></div>
 <button class="pr" id="ago" style="width:100%">Entrar</button>
+<div style="text-align:center;margin-top:8px"><a id="afg" href="#" class="hide sub" style="font-size:12px" onclick="return false">Esqueci minha senha</a></div>
 <div class="sub" id="aor" style="text-align:center;margin:10px 0">— ou —</div>
 <button id="agg" style="width:100%;background:#fff;color:#1f1f1f;font-weight:700;border:0"><span style="background:conic-gradient(from -45deg,#ea4335 0 25%,#fbbc05 0 50%,#34a853 0 75%,#4285f4 0);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:900;font-size:17px">G</span> Entrar com Google</button>
-<div class="warn">Modo demonstração: contas e progresso ficam salvos apenas neste navegador.</div></div></div></div>
+<div class="warn" id="alw2">Modo demonstração: contas e progresso ficam salvos apenas neste navegador.</div></div></div></div>
 <div class="md hide" id="md"><div id="mb"></div></div>
 <div class="md hide" id="gm"><div id="gb"></div></div>
 
 <noscript><div class="warn" style="margin:16px">O CryptoMiner Tycoon precisa de JavaScript ativado no navegador para funcionar.</div></noscript>
 <script src="config-site.js"></script>
+<script src="cloud.js?v=1.0.0"></script>
 <script src="app.js?v=1.0.0"></script>
 <!-- v4: troca de cripto + novo design -->
 <!-- v6: economia mais dificil + instalacao automatica -->

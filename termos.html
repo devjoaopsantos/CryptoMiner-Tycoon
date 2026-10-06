@@ -1,14 +1,114 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Termos de Uso · CryptoMiner</title><style>body{font-family:system-ui,sans-serif;background:#080b14;color:#e8eeff;max-width:760px;margin:0 auto;padding:20px;line-height:1.6}h1{background:linear-gradient(90deg,#ffb020,#ff5a8a,#a478ff);-webkit-background-clip:text;background-clip:text;color:transparent}h2{font-size:17px;margin-top:26px}a{color:#ffb020}.rev{background:#3a0f14;border:1px solid #ff5a5f;border-radius:10px;padding:10px 14px;font-size:14px}small{color:#8592b5}</style></head><body><p><a href="index.html">← Voltar ao jogo</a></p><h1>Termos de Uso</h1><p class="rev"><b>MODELO PARA REVISÃO:</b> substitua os campos [entre colchetes] e peça a um advogado de direito digital para revisar antes de publicar. Depois apague este aviso.</p><small>Última atualização: [DATA]</small>
-<h2>1. Quem somos</h2><p>O CryptoMiner Tycoon ("Jogo") é oferecido por [NOME OU RAZÃO SOCIAL], [CNPJ/CPF], [CIDADE/UF]. Contato: [E-MAIL DE CONTATO].</p>
-<h2>2. O que é o Jogo</h2><p>O Jogo é uma <b>simulação de entretenimento</b> inspirada em jogos de mineração. Equipamentos, energia, créditos (VLX) e saldos de criptomoedas exibidos no Jogo são <b>itens virtuais de jogo</b> e, na versão atual, <b>não têm valor monetário</b> e não podem ser trocados por dinheiro ou criptomoedas reais.</p>
-<h2>3. Quem pode usar</h2><p>O Jogo é destinado a <b>maiores de 18 anos</b>. Ao criar a conta você declara ter 18 anos ou mais.</p>
-<h2>4. Conta</h2><p>Você é responsável por manter sua senha em segurança e por tudo que ocorre na sua conta. Informe dados verdadeiros. Na versão atual, a conta e o progresso ficam salvos no navegador do seu dispositivo.</p>
-<h2>5. Sem promessa de ganhos</h2><p>Os ganhos, cotações e valores em dólar ou reais mostrados no Jogo são <b>simulados</b> e servem apenas para a mecânica do jogo. O Jogo <b>não oferece investimento</b> nem promete retorno financeiro.</p>
-<h2>6. Pagamentos e saques</h2><p>Compras de créditos e saques em criptomoedas <b>não estão disponíveis</b> na versão atual. Se forem liberados no futuro, as regras, taxas, limites, prazos, verificações de identidade e eventuais restrições serão publicadas aqui antes de entrarem em vigor.</p>
-<h2>7. Condutas proibidas</h2><p>É proibido usar robôs ou automações, criar múltiplas contas para obter vantagens, explorar falhas, fraudar, tentar acessar contas de terceiros, copiar ou fazer engenharia reversa do Jogo ou usá-lo de forma que prejudique outras pessoas ou o serviço. Podemos suspender ou excluir contas que violem estes Termos.</p>
-<h2>8. Disponibilidade e manutenção</h2><p>O Jogo pode ficar indisponível para manutenção, atualizações ou por falhas. Podemos alterar, reiniciar ou encerrar recursos, inclusive saldos virtuais, quando necessário para o funcionamento ou a segurança do serviço.</p>
-<h2>9. Marcas e conteúdo de terceiros</h2><p>Nomes e símbolos de criptomoedas são marcas de seus respectivos titulares, usados apenas para identificar as moedas simuladas, sem vínculo ou endosso.</p>
-<h2>10. Limitação de responsabilidade</h2><p>Na máxima extensão permitida pela lei, não nos responsabilizamos por perdas decorrentes do uso do Jogo, de indisponibilidade ou da perda de dados salvos no seu navegador. Recomendamos exportar seu progresso pela tela Perfil.</p>
-<h2>11. Alterações destes Termos</h2><p>Podemos atualizar estes Termos. A data de atualização fica no topo. O uso continuado após a mudança indica concordância.</p>
-<h2>12. Lei e foro</h2><p>Estes Termos seguem as leis do Brasil. Fica eleito o foro de [CIDADE/UF], ressalvados os direitos do consumidor previstos em lei.</p>
-</body></html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Termos de Uso · CryptoMiner Tycoon</title>
+<meta name="description" content="Termos de Uso do CryptoMiner Tycoon, jogo de simulação de mineração de criptomoedas com recursos virtuais e sem promessa de ganhos.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#080b14">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<style>
+:root{color-scheme:dark;--bg:#080b14;--card:#121829;--line:#222c47;--tx:#e8eeff;--mu:#9aa6c7;--ac:#ffb020}
+*{box-sizing:border-box}
+body{margin:0;color:var(--tx);font-family:system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.65;background:radial-gradient(700px 400px at 15% -5%,#2a1f5c88,transparent),radial-gradient(800px 500px at 90% 0%,#0f3a6b77,transparent),linear-gradient(#080b14,#0a1020);background-attachment:fixed}
+.w{max-width:760px;margin:0 auto;padding:max(16px,env(safe-area-inset-top)) 16px 48px}
+.back{display:inline-block;margin:6px 0 14px;color:var(--ac);text-decoration:none;font-size:14px;font-weight:700}
+h1{font-size:26px;margin:0 0 4px;background:linear-gradient(90deg,#ffb020,#ff5a8a,#a478ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:17px;margin:26px 0 6px;color:var(--ac)}
+p,li{font-size:15px;color:#d5dcf2;overflow-wrap:anywhere}
+ul{padding-left:20px;margin:6px 0}
+.meta{color:var(--mu);font-size:13px;margin:0 0 14px}
+.box{background:linear-gradient(160deg,#151c32,var(--card));border:1px solid var(--line);border-left:4px solid var(--ac);border-radius:14px;padding:12px 14px;margin:14px 0}
+.box p{margin:0}
+.pend{background:#ffb02026;color:var(--ac);border:1px dashed var(--ac);border-radius:6px;padding:0 6px;font-weight:700;font-size:.92em}
+a{color:var(--ac)}
+</style>
+</head>
+<body>
+<div class="w">
+<a class="back" href="./">← Voltar ao jogo</a>
+<h1>Termos de Uso</h1>
+<p class="meta">CryptoMiner Tycoon · Última atualização: <span data-site="ATUALIZADO" class="pend">A PREENCHER: data</span></p>
+
+<div class="box"><p><b>Resumo importante:</b> o CryptoMiner Tycoon é um <b>jogo de simulação</b>. Tudo o que aparece nele (moedas, equipamentos, saldos, ganhos e cotações) é <b>virtual</b>. Não há mineração real de criptomoedas, <b>não há promessa de lucro</b> e, neste momento, <b>pagamentos e saques não estão disponíveis</b>.</p></div>
+
+<h2>1. Aceitação dos Termos</h2>
+<p>Ao criar uma conta ou usar o CryptoMiner Tycoon ("Jogo"), você declara que leu e concorda com estes Termos de Uso e com a <a href="privacidade.html">Política de Privacidade</a>. Se não concordar, não utilize o Jogo.</p>
+
+<h2>2. Quem é o responsável</h2>
+<p>O Jogo é disponibilizado por:</p>
+<ul>
+<li>Responsável: <span data-site="NOME_RESPONSAVEL" class="pend">A PREENCHER: nome completo ou razão social</span></li>
+<li>CPF/CNPJ: <span data-site="DOCUMENTO" class="pend">A PREENCHER: CPF ou CNPJ</span></li>
+<li>Contato: <span data-site="EMAIL_CONTATO" class="pend">A PREENCHER: e-mail de contato</span></li>
+</ul>
+
+<h2>3. O que é o CryptoMiner Tycoon</h2>
+<p>O CryptoMiner Tycoon é um jogo/simulador de mineração virtual, de entretenimento, no estilo "tycoon". Nele você monta uma sala com equipamentos virtuais, joga minijogos, abre caixas, usa poções e acompanha ganhos simulados.</p>
+<ul>
+<li>A mineração apresentada é <b>simulada</b>. O Jogo <b>não realiza mineração real</b> de criptomoedas e não usa o poder de processamento do seu dispositivo para minerar.</li>
+<li>Poder de mineração (GH/s), energia, equipamentos, baterias, caixas, poções, rankings e o "ranking de mineradores" são elementos do jogo. Os demais mineradores listados são fictícios.</li>
+<li>Saldos exibidos em moedas como TRX, POL, SHIB, XRP, SOL e na moeda do jogo (VLX/Voltrix), bem como valores em dólar (US$) ou reais (R$), são <b>saldos virtuais de jogo</b>. Não representam ativos reais, não ficam em nenhuma carteira ou corretora e não têm valor monetário garantido.</li>
+<li>As cotações entre as moedas do jogo são simuladas e variam de forma automática dentro do Jogo. A cotação do dólar em reais é obtida de serviços públicos apenas como referência de exibição.</li>
+</ul>
+
+<h2>4. Sem promessa de lucro</h2>
+<p>Nada no Jogo constitui oferta de investimento, recomendação financeira, promessa de rendimento ou garantia de ganho de qualquer natureza. O Jogo não deve ser usado como base para decisões financeiras. Criptomoedas reais envolvem risco, e o Jogo não representa o desempenho de nenhuma delas.</p>
+
+<h2>5. Pagamentos e saques</h2>
+<ul>
+<li>Enquanto estiverem desativados, <b>pagamentos e saques não estão disponíveis</b>. Os botões e telas relacionados (como "Comprar VLX" e "Saque") servem apenas para demonstração.</li>
+<li>Nenhuma cobrança é feita e nenhuma transação é enviada à blockchain por meio do Jogo.</li>
+<li>Se pagamentos ou saques forem ativados no futuro, estes Termos serão atualizados antes, com as regras, valores, taxas, prazos e condições aplicáveis, e a ativação dependerá de sistemas que confirmem as operações de forma segura.</li>
+</ul>
+
+<h2>6. Elegibilidade</h2>
+<p>O Jogo é destinado a maiores de 18 anos. Ao criar uma conta você declara ter 18 anos ou mais.</p>
+
+<h2>7. Conta e progresso</h2>
+<ul>
+<li data-cloud="off">Neste momento, contas e progresso ficam salvos <b>no armazenamento do seu próprio navegador</b>, no dispositivo que você usa. Não há servidor que guarde sua conta.</li>
+<li data-cloud="on">Sua conta (nome, e-mail e senha) e seu progresso ficam salvos <b>em um servidor</b>, para que você entre de qualquer aparelho. Os detalhes estão na <a href="privacidade.html">Política de Privacidade</a>. O progresso é enviado como seu navegador o produz, e tentativas de adulterá-lo podem levar à suspensão da conta.</li>
+<li data-cloud="off">Por isso, limpar os dados do navegador, trocar de aparelho ou navegador ou usar a função "Excluir minha conta e dados" pode apagar seu progresso de forma definitiva. O Jogo oferece "Exportar progresso" e "Importar progresso" para você manter uma cópia.</li>
+<li data-cloud="on">Usar a função "Excluir minha conta e dados" apaga sua conta e seu progresso de forma definitiva, e não é possível recuperá-los. O Jogo oferece "Exportar progresso" e "Importar progresso" para você manter uma cópia.</li>
+<li data-cloud="off">Você é responsável por manter sua senha em sigilo e pelo que for feito com sua conta no seu dispositivo. Não é possível recuperar senhas esquecidas enquanto a conta for apenas local.</li>
+<li data-cloud="on">Você é responsável por manter sua senha em sigilo e pelo que for feito com sua conta. Se esquecer a senha, use "Esqueci minha senha" na tela de login para receber um link por e-mail.</li>
+</ul>
+
+<h2>8. Carteiras de criptomoedas</h2>
+<p>O Jogo permite conectar carteiras de extensão do navegador (MetaMask, TronLink, Phantom e Crossmark). Lemos <b>apenas o endereço público</b>. Nunca solicitamos chave privada, frase de recuperação ou senha da sua carteira, e você não deve informá-las em nenhum lugar do Jogo. Desconfie de qualquer pedido desse tipo.</p>
+
+<h2>9. Uso adequado</h2>
+<p>Você concorda em não: (a) tentar fraudar, manipular ou adulterar o funcionamento do Jogo, saldos ou rankings; (b) explorar falhas de forma abusiva; (c) usar automações que prejudiquem o Jogo ou outros usuários; (d) tentar acessar dados de terceiros; (e) usar o Jogo para fins ilegais. Falhas encontradas podem ser comunicadas pelo contato indicado nestes Termos.</p>
+
+<h2>10. Propriedade intelectual e marcas de terceiros</h2>
+<p>O código, o design e os textos do Jogo pertencem ao responsável indicado acima, salvo conteúdos de terceiros, que pertencem aos respectivos titulares. Nomes e símbolos de criptomoedas (como TRX, POL, SHIB, XRP, SOL) e de carteiras são marcas ou identificações de seus respectivos titulares, usados apenas para fins de identificação dentro de um jogo de simulação. O CryptoMiner Tycoon <b>não tem afiliação, patrocínio ou endosso</b> de nenhum desses projetos ou empresas.</p>
+
+<h2>11. Publicidade</h2>
+<p>No momento, o Jogo não exibe anúncios de terceiros. Os "anúncios" e "recompensas" que aparecem como parte da jogabilidade são <b>conteúdo simulado do próprio Jogo</b>, sem anunciante real. Caso publicidade de terceiros seja adicionada, a Política de Privacidade será atualizada antes e os anúncios serão identificados como tal.</p>
+
+<h2>12. Disponibilidade, manutenção e mudanças no Jogo</h2>
+<p>O Jogo é oferecido "como está". Podemos alterar, suspender ou encerrar recursos, reiniciar ou ajustar saldos, preços, recompensas e regras do jogo, ou realizar manutenções, a qualquer momento, inclusive para corrigir erros ou manter o equilíbrio da simulação. Como os itens são virtuais, não há direito a indenização por essas alterações.</p>
+
+<h2>13. Limitação de responsabilidade</h2>
+<p>Na medida permitida pela lei, o responsável não se responsabiliza por perdas de progresso decorrentes de limpeza de dados do navegador, falhas do dispositivo ou do navegador, indisponibilidade de serviços de terceiros (como a cotação do dólar ou carteiras), nem por decisões financeiras tomadas com base no Jogo. Nada nestes Termos exclui direitos que a legislação aplicável (incluindo o Código de Defesa do Consumidor, quando cabível) garanta a você.</p>
+
+<h2>14. Encerramento</h2>
+<p>Você pode parar de usar o Jogo e apagar seus dados a qualquer momento, na aba Perfil ("Excluir minha conta e dados"). Podemos suspender ou limitar o acesso de quem violar estes Termos.</p>
+
+<h2>15. Alterações destes Termos</h2>
+<p>Estes Termos podem ser atualizados. A data da última atualização aparece no topo desta página. O uso continuado do Jogo após a atualização indica concordância com a nova versão.</p>
+
+<h2>16. Lei aplicável</h2>
+<p>Estes Termos são regidos pela legislação brasileira. Sempre que a lei assim determinar, fica assegurado ao usuário o foro de seu domicílio.</p>
+
+<h2>17. Contato</h2>
+<p>Dúvidas, solicitações ou comunicação de problemas: <span data-site="EMAIL_CONTATO" class="pend">A PREENCHER: e-mail de contato</span></p>
+</div>
+<script src="config-site.js"></script>
+<script>
+(function(){var S=window.SITE||{},ON=!!(S.SUPABASE_URL&&S.SUPABASE_ANON_KEY);document.querySelectorAll('[data-cloud]').forEach(function(el){if((el.getAttribute('data-cloud')==='on')!==ON)el.style.display='none'});document.querySelectorAll('[data-site]').forEach(function(el){var v=S[el.getAttribute('data-site')];if(v){el.textContent=v;el.classList.remove('pend')}})})();
+</script>
+</body>
+</html>
